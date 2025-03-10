@@ -1,0 +1,1 @@
+{"name":"Local: b","url":"d:\\Competative Programming\\Binary Search\\b.cpp","tests":[{"id":1727346717251,"input":"3\n??1\n?\n5?623","output":"991\n7\n58623"},{"id":1727348405077,"input":"1\n?","output":"7"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Competative Programming\\Binary Search\\b.cpp","group":"local","local":true}
