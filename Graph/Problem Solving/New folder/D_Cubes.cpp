@@ -24,20 +24,18 @@ const int mod = 1e9 + 7;
 
 void solve()
 {
-
-    ll n,k; cin>>n>>k;
-    vector<ll>v(n);
-    for(ll i=0;i<n;i++)	cin>>v[i];
-    ll l=0,mn=LLONG_MAX;
-    multiset<ll>mst;
-    for(ll r=0;r<n;r++)
+    ll n;   cin>>n;
+    for(ll i=1;i<2.09715e+06-3;i++)
     {
-        mst.insert(v[r]);
-        if(r-l+1==k)
+        ll need=n+(i*i*i);
+        ll a=cbrtl(need);
+        if(a*a*a==need)
         {
-            
-        }
+            cout<<a<<" "<<i<<nl;
+            return;
+        }           
     }
+    cout<<-1<<nl;
 
 }
 

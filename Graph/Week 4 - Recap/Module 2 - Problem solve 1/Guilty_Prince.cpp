@@ -22,22 +22,43 @@ typedef long double ld;
     cout.tie(NULL);
 const int mod = 1e9 + 7;
 
+ll m,n,ans;
+vector<string>v; 
+vector<vector<bool>>vis;
+vector<pair<ll,ll>>direction={{1,0},{-1,0},{0,-1},{0,1}};
+bool valid(ll i,ll j)
+{
+    return (i>=0 && j>=0 && i<n && j<m);
+}
+
+void dfs(ll pari,ll parj)
+{
+    ans++;
+    vis[pari][parj]=true;
+    for(auto [x,y]: direction)
+    {
+        ll childi=pari+x,childj=parj+y;
+        if(valid(childi,childj) && !vis[childi][childj] && v[childi][childj]=='.')
+            dfs(childi,childj);
+    }
+}
+
 void solve()
 {
 
-    ll n;   cin>>n;
-    vector<ll>v(n);
-    for (ll i=0;i<n;i++)    cin>>v[i];
-    
+    ans=0;
+    cin>>m>>n;
+    v.resize(n);
+    vis.assign(n,vector<bool>(m,false));
+    for(ll i=0;i<n;i++) cin>>v[i];           
     for(ll i=0;i<n;i++)
     {
-        for(ll j=0;j<n;j++)
+        for(ll j=0;j<m;j++)
         {
-                       
+            if(v[i][j]=='@')    dfs(i,j);
         }           
     }
-
-    return;
+    cout<<ans<<nl;
 }
 
 int32_t main()
@@ -48,7 +69,7 @@ int32_t main()
     cin>>t;
     for(ll i=1;i<=t;i++)
     {
-        // cout<<"Case "<<i<<": ";
+        cout<<"Case "<<i<<": ";
         solve();           
     }
 

@@ -22,21 +22,44 @@ typedef long double ld;
     cout.tie(NULL);
 const int mod = 1e9 + 7;
 
+ll n,m; 
+vector<vector<ll>>adj;
+vector<bool>vis;
+
+void dfs(ll par)
+{
+    vis[par]=true;
+    for(ll child:adj[par])
+    {
+        if(!vis[child]) dfs(child);
+    }
+}
+
 void solve()
 {
-
-    ll n,k; cin>>n>>k;
-    vector<ll>v(n);
-    for(ll i=0;i<n;i++)	cin>>v[i];
-    ll l=0,mn=LLONG_MAX;
-    multiset<ll>mst;
-    for(ll r=0;r<n;r++)
+    adj.clear();
+    cin>>n>>m;
+    adj.resize(n+1);
+    vis.assign(n+1,false);
+    for(ll i=0;i<m;i++)
     {
-        mst.insert(v[r]);
-        if(r-l+1==k)
+        ll u,v; cin>>u>>v;
+        adj[u].pb(v);
+        adj[v].pb(u);
+    }
+    vector<ll>ans;
+    for(ll i=1;i<=n;i++)
+    {
+        if(!vis[i])
         {
-            
-        }
+            dfs(i);
+            ans.pb(i);
+        }           
+    }
+    cout<<ans.size()-1<<nl;
+    for(ll i=0;i<ans.size()-1;i++)
+    {
+        cout<<ans[i]<<" "<<ans[i+1]<<nl;           
     }
 
 }

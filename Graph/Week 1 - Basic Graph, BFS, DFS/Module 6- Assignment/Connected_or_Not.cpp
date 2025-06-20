@@ -22,21 +22,27 @@ typedef long double ld;
     cout.tie(NULL);
 const int mod = 1e9 + 7;
 
+const int N=1e3+5;
+ll mat[N][N];
+
 void solve()
 {
 
-    ll n,k; cin>>n>>k;
-    vector<ll>v(n);
-    for(ll i=0;i<n;i++)	cin>>v[i];
-    ll l=0,mn=LLONG_MAX;
-    multiset<ll>mst;
-    for(ll r=0;r<n;r++)
+    ll n,e; cin>>n>>e;
+    memset(mat,0,sizeof(mat));
+    for(ll i=0;i<e;i++)
     {
-        mst.insert(v[r]);
-        if(r-l+1==k)
-        {
-            
-        }
+        ll a,b; cin>>a>>b;
+        mat[a][b]=1;
+    }
+    for(ll i=0;i<N;i++) mat[i][i]=1;            
+    
+    ll q;   cin>>q;
+    while(q--)
+    {
+        ll a,b; cin>>a>>b;
+        if(mat[a][b]==1)    yes;
+        else no;
     }
 
 }

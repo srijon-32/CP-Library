@@ -22,22 +22,45 @@ typedef long double ld;
     cout.tie(NULL);
 const int mod = 1e9 + 7;
 
+bool cycle;
+vector<vector<ll>>adj;
+vector<bool>vis;
+vector<bool>pathVis;
+
+void dfs(ll parent)
+{
+    vis[parent]=true;
+    pathVis[parent]=true;
+    for(ll child:adj[parent])
+    {
+        if(pathVis[child])  cycle=true;
+        if(!vis[child]) dfs(child);
+    }
+    pathVis[parent]=false;
+}
+
 void solve()
 {
 
-    ll n,k; cin>>n>>k;
-    vector<ll>v(n);
-    for(ll i=0;i<n;i++)	cin>>v[i];
-    ll l=0,mn=LLONG_MAX;
-    multiset<ll>mst;
-    for(ll r=0;r<n;r++)
+    ll n;   cin>>n;
+    adj.resize(n);
+    vis.assign(n,false);
+    pathVis.assign(n,false);
+    for(ll i=0;i<n;i++)
     {
-        mst.insert(v[r]);
-        if(r-l+1==k)
+        for(ll j=0;j<n;j++)
         {
-            
-        }
+            ll x;   cin>>x;
+            if(x==1)    adj[i].pb(j);           
+        }           
     }
+    cycle=false;
+    for(ll i=0;i<n;i++)
+    {
+        if(!vis[i]) dfs(i);           
+    }
+    if(cycle)   cout<<1<<nl;
+    else cout<<0<<nl;
 
 }
 

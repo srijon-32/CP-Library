@@ -22,21 +22,51 @@ typedef long double ld;
     cout.tie(NULL);
 const int mod = 1e9 + 7;
 
+vector<ll> v[10];
+bool vis[10];
+
+void bfs(ll src,ll des)
+{
+    queue<pair<ll,ll>>q;
+    q.push({src,0});
+    vis[src]=true;
+    while(!q.empty())
+    {
+        auto [parent,level]=q.front();
+        q.pop();
+        if(parent==des)
+        {
+            cout<<level<<nl;
+            return;
+        }
+        for(ll child:v[parent])
+        {
+            if(!vis[child])
+            {
+                q.push({child,level+1});
+                vis[child]=true;
+            }
+        }
+    }
+    cout<<-1<<nl;
+}
+
 void solve()
 {
 
-    ll n,k; cin>>n>>k;
-    vector<ll>v(n);
-    for(ll i=0;i<n;i++)	cin>>v[i];
-    ll l=0,mn=LLONG_MAX;
-    multiset<ll>mst;
-    for(ll r=0;r<n;r++)
+    ll n,e; cin>>n>>e;
+    for(ll i=0;i<e;i++)
     {
-        mst.insert(v[r]);
-        if(r-l+1==k)
-        {
-            
-        }
+        ll a,b; cin>>a>>b;
+        v[a].pb(b);
+        v[b].pb(a);
+    }
+    ll q;   cin>>q;
+    while(q--)
+    {
+        ll src,des; cin>>src>>des;
+        memset(vis,false,sizeof(vis));
+        bfs(src,des);
     }
 
 }

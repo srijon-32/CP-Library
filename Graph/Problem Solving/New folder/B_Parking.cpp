@@ -22,21 +22,27 @@ typedef long double ld;
     cout.tie(NULL);
 const int mod = 1e9 + 7;
 
+vector<ll>parent;
+
+ll find(ll node)
+{
+    if(parent[node]==node)  return node;
+    return parent[node]=find(parent[node]);
+}
+
 void solve()
 {
 
-    ll n,k; cin>>n>>k;
-    vector<ll>v(n);
-    for(ll i=0;i<n;i++)	cin>>v[i];
-    ll l=0,mn=LLONG_MAX;
-    multiset<ll>mst;
-    for(ll r=0;r<n;r++)
+    ll n;   cin>>n;
+    parent.resize(n+1);
+    iota(all(parent),0);
+    for(ll i=0;i<n;i++)
     {
-        mst.insert(v[r]);
-        if(r-l+1==k)
-        {
-            
-        }
+        ll x;   cin>>x;
+        x=find(x);         
+        cout<<x<<" ";
+        if(x+1>n)   parent[x]=parent[1];
+        else    parent[x]=parent[x+1];
     }
 
 }

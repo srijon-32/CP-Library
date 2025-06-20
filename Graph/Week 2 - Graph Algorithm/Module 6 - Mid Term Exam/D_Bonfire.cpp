@@ -25,19 +25,9 @@ const int mod = 1e9 + 7;
 void solve()
 {
 
-    ll n,k; cin>>n>>k;
-    vector<ll>v(n);
-    for(ll i=0;i<n;i++)	cin>>v[i];
-    ll l=0,mn=LLONG_MAX;
-    multiset<ll>mst;
-    for(ll r=0;r<n;r++)
-    {
-        mst.insert(v[r]);
-        if(r-l+1==k)
-        {
-            
-        }
-    }
+    ll n,r,c;   cin>>n>>r>>c;
+    string s;   cin>>s;
+    
 
 }
 

@@ -25,18 +25,36 @@ const int mod = 1e9 + 7;
 void solve()
 {
 
-    ll n,k; cin>>n>>k;
-    vector<ll>v(n);
-    for(ll i=0;i<n;i++)	cin>>v[i];
-    ll l=0,mn=LLONG_MAX;
-    multiset<ll>mst;
-    for(ll r=0;r<n;r++)
+    ll n;   cin>>n;
+    ll adj[n][n];
+    for(ll i=0;i<n;i++)
     {
-        mst.insert(v[r]);
-        if(r-l+1==k)
+        for(ll j=0;j<n;j++)
         {
-            
+            cin>>adj[i][j];           
+        }           
+    }
+    for(int k=0;k<n;k++)
+    {
+        for(ll i=0;i<n;i++)
+        {
+            for(ll j=0;j<n;j++)
+            {
+                if(k==i || k==j)    continue;
+                if(adj[i][k]+adj[k][j] < adj[i][j])
+                {
+                    adj[i][j]=adj[i][k]+adj[k][j];
+                }               
+            }           
         }
+    }
+    for(ll i=0;i<n;i++)
+    {
+        for(ll j=0;j<n;j++)
+        {
+            cout<<adj[i][j]<<" ";           
+        }           
+        cout<<nl;
     }
 
 }

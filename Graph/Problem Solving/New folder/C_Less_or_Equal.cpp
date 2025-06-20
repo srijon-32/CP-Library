@@ -28,16 +28,21 @@ void solve()
     ll n,k; cin>>n>>k;
     vector<ll>v(n);
     for(ll i=0;i<n;i++)	cin>>v[i];
-    ll l=0,mn=LLONG_MAX;
-    multiset<ll>mst;
-    for(ll r=0;r<n;r++)
+    sort(all(v));
+    if(k==0)
     {
-        mst.insert(v[r]);
-        if(r-l+1==k)
-        {
-            
-        }
+        if(v[0]==1) cout<<-1<<nl;
+        else cout<<1<<nl;
+        return;
     }
+    if(k==n)
+    {
+        cout<<v.back()<<nl;
+        return;
+    }
+    ll last=v[k-1];
+    if(last==v[k])  cout<<-1<<nl;
+    else cout<<last<<nl;
 
 }
 

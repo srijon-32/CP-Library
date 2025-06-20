@@ -25,20 +25,12 @@ const int mod = 1e9 + 7;
 void solve()
 {
 
-    ll n,k; cin>>n>>k;
+    ll n;   cin>>n;
     vector<ll>v(n);
-    for(ll i=0;i<n;i++)	cin>>v[i];
-    ll l=0,mn=LLONG_MAX;
-    multiset<ll>mst;
-    for(ll r=0;r<n;r++)
-    {
-        mst.insert(v[r]);
-        if(r-l+1==k)
-        {
-            
-        }
-    }
+    for (ll i=0;i<n;i++)    cin>>v[i];
+    
 
+    return;
 }
 
 int32_t main()
@@ -46,7 +38,7 @@ int32_t main()
     FIO
 
     ll t=1;
-    // cin>>t;
+    cin>>t;
     for(ll i=1;i<=t;i++)
     {
         // cout<<"Case "<<i<<": ";

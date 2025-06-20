@@ -25,19 +25,24 @@ const int mod = 1e9 + 7;
 void solve()
 {
 
-    ll n,k; cin>>n>>k;
-    vector<ll>v(n);
-    for(ll i=0;i<n;i++)	cin>>v[i];
-    ll l=0,mn=LLONG_MAX;
-    multiset<ll>mst;
-    for(ll r=0;r<n;r++)
+    string s;   cin>>s;
+    ll ans=0,pos=0;
+    for(ll i=0;i<s.size();)
     {
-        mst.insert(v[r]);
-        if(r-l+1==k)
+        if(pos%2==0)
         {
-            
+            if(s[i]=='i')   i++;
+            else ans++;
         }
+        else
+        {
+            if(s[i]=='o')   i++;
+            else ans++;
+        }
+        pos++;
     }
+    if(pos%2==1)    ans++;
+    cout<<ans<<nl;
 
 }
 

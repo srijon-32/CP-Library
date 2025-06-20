@@ -1,0 +1,6 @@
+{
+    "editor.inlineSuggest.enabled": false,
+"inlineChat.enabled": false,
+"workbench.inlineChat.enabled": false
+
+}

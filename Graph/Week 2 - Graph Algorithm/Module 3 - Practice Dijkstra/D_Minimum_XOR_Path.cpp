@@ -22,23 +22,41 @@ typedef long double ld;
     cout.tie(NULL);
 const int mod = 1e9 + 7;
 
+ll n,m; 
+const int N=11;
+vector<pair<ll,ll>> adj[N];
+bool vis[N];
+ll ans;
+void dfs(ll parent,ll xr)
+{
+    if(parent==n)
+    {
+        ans=min(ans,xr);
+    }
+    vis[parent]=true;
+    for(auto [child,x]:adj[parent])
+    {
+        if(!vis[child])
+        {
+            dfs(child,xr^x);
+        }
+    }
+    vis[parent]=false;  
+}
 void solve()
 {
 
-    ll n,k; cin>>n>>k;
-    vector<ll>v(n);
-    for(ll i=0;i<n;i++)	cin>>v[i];
-    ll l=0,mn=LLONG_MAX;
-    multiset<ll>mst;
-    for(ll r=0;r<n;r++)
+    cin>>n>>m;
+    for(ll i=0;i<m;i++)
     {
-        mst.insert(v[r]);
-        if(r-l+1==k)
-        {
-            
-        }
+        ll u,v,w;   cin>>u>>v>>w;
+        adj[u].pb({v,w});
+        adj[v].pb({u,w});
     }
-
+    ans=LLONG_MAX;
+    fill(vis,vis+N,false);
+    dfs(1,0);
+    cout<<ans<<nl;
 }
 
 int32_t main()

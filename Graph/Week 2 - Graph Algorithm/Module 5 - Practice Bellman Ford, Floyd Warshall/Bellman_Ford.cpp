@@ -21,24 +21,35 @@ typedef long double ld;
     cin.tie(NULL);                    \
     cout.tie(NULL);
 const int mod = 1e9 + 7;
+const int inf=30000;
+struct edge{
+    ll u,v,w;
+};
 
 void solve()
 {
 
-    ll n,k; cin>>n>>k;
-    vector<ll>v(n);
-    for(ll i=0;i<n;i++)	cin>>v[i];
-    ll l=0,mn=LLONG_MAX;
-    multiset<ll>mst;
-    for(ll r=0;r<n;r++)
+    ll n,e; cin>>n>>e;
+    vector<edge>edgeList;
+    for(ll i=0;i<e;i++)
     {
-        mst.insert(v[r]);
-        if(r-l+1==k)
+        ll u,v,w;   cin>>u>>v>>w;
+        edgeList.pb({u,v,w});
+    }
+    vector<ll>dis(n+1,inf);
+    dis[1]=0;
+    for(ll i=1;i<n;i++)
+    {
+        for(auto [u,v,w]:edgeList)
         {
-            
+            if(dis[u]!=inf && dis[u]+w < dis[v])
+            {
+                dis[v]=dis[u]+w;
+            }
         }
     }
-
+    for(ll i=1;i<=n;i++) cout<<dis[i]<<" ";
+    cout<<nl;
 }
 
 int32_t main()

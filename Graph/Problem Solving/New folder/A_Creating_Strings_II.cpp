@@ -22,22 +22,38 @@ typedef long double ld;
     cout.tie(NULL);
 const int mod = 1e9 + 7;
 
+const int N=1e6+5;
+vector<ll>C(N);
+void comb()
+{
+    C[0]=1;
+    for(ll i=1;i<N;i++) C[i]=(i*C[i-1])%mod;    
+}
+
+ll biexp(ll a,ll b)
+{
+    ll res=1;
+    while(b>0)
+    {
+        if(b&1) res=(res*a)%mod;
+        a=(a*a)%mod;
+        b/=2;
+    }
+    return res;
+}
+
 void solve()
 {
 
-    ll n,k; cin>>n>>k;
-    vector<ll>v(n);
-    for(ll i=0;i<n;i++)	cin>>v[i];
-    ll l=0,mn=LLONG_MAX;
-    multiset<ll>mst;
-    for(ll r=0;r<n;r++)
+    string s;   cin>>s;
+    map<char,ll>mp;
+    for(char ch:s)  mp[ch]++;
+    ll ans=C[s.size()];
+    for(auto [a,b]:mp)
     {
-        mst.insert(v[r]);
-        if(r-l+1==k)
-        {
-            
-        }
+        ans=((ans%mod)*biexp(C[b],mod-2))%mod;
     }
+    cout<<ans<<nl;
 
 }
 
@@ -45,6 +61,7 @@ int32_t main()
 {
     FIO
 
+    comb();
     ll t=1;
     // cin>>t;
     for(ll i=1;i<=t;i++)

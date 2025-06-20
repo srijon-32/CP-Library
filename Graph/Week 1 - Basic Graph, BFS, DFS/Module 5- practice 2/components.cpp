@@ -21,24 +21,39 @@ typedef long double ld;
     cin.tie(NULL);                    \
     cout.tie(NULL);
 const int mod = 1e9 + 7;
+const int N=100;
+
+vector<ll> v[N];
+bool vis[N]={false};
+void dfs(ll source)
+{
+    vis[source]=true;
+    for(ll child:v[source])
+    {
+        if(!vis[child]) dfs(child);
+    }
+}
 
 void solve()
 {
 
-    ll n,k; cin>>n>>k;
-    vector<ll>v(n);
-    for(ll i=0;i<n;i++)	cin>>v[i];
-    ll l=0,mn=LLONG_MAX;
-    multiset<ll>mst;
-    for(ll r=0;r<n;r++)
+    ll n,e; cin>>n>>e;
+    for(ll i=0;i<e;i++)
     {
-        mst.insert(v[r]);
-        if(r-l+1==k)
-        {
-            
-        }
+        ll a,b; cin>>a>>b;
+        v[a].pb(b);
+        v[b].pb(a);           
     }
-
+    ll components=0;
+    for(ll i=0;i<n;i++)
+    {
+        if(!vis[i])
+        {
+            dfs(i);
+            components++;
+        }                  
+    }
+    cout<<components<<nl;
 }
 
 int32_t main()

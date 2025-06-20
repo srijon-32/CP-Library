@@ -25,20 +25,35 @@ const int mod = 1e9 + 7;
 void solve()
 {
 
-    ll n,k; cin>>n>>k;
+    ll n;   cin>>n;
     vector<ll>v(n);
     for(ll i=0;i<n;i++)	cin>>v[i];
-    ll l=0,mn=LLONG_MAX;
-    multiset<ll>mst;
-    for(ll r=0;r<n;r++)
+    vector<ll>left(n,0),right(n,0);
+    map<ll,ll>mp;
+    for(ll i=0;i<n;i++)
     {
-        mst.insert(v[r]);
-        if(r-l+1==k)
-        {
-            
-        }
+       mp[v[i]]++;
+       left[i]=mp.size();            
     }
-
+    map<ll,ll>mp1;
+    for(ll i=n-1;i>=0;i--)
+    {
+       mp1[v[i]]++;
+       right[i]=mp1.size();            
+    }
+    ll mx=0;
+    for(ll i=0;i<n;i++)
+    {
+        if(i==0)    mx=max(mx,right[i]);
+        else if(i==n-1) mx=max(mx,left[i]);
+        else
+        {
+            mx=max(mx,left[i]+right[i+1]);
+            mx=max(mx,left[i-1]+right[i]);
+        }           
+    }
+    cout<<mx<<nl;
+    
 }
 
 int32_t main()

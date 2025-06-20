@@ -22,22 +22,40 @@ typedef long double ld;
     cout.tie(NULL);
 const int mod = 1e9 + 7;
 
+const int N=1e3+5;
+ll n,m; 
+ll starti,startj,endi,endj; 
+vector<string>v;
+bool ok;
+ll vis[N][N];
+vector<pair<ll,ll>>d={{-1,0},{1,0},{0,-1},{0,1}};
+bool valid(ll i,ll j)
+{
+    return (i>=0 && i<n && j>=0 && j<m);
+}
+void dfs(ll si,ll sj)
+{
+    vis[si][sj]=true;
+    for(auto [x,y]:d)
+    {
+        if(valid(si+x,sj+y) && !vis[si+x][sj+y] && v[si+x][sj+y]=='.')
+        {
+            dfs(si+x,sj+y);
+        }
+    }
+}
+
 void solve()
 {
 
-    ll n,k; cin>>n>>k;
-    vector<ll>v(n);
-    for(ll i=0;i<n;i++)	cin>>v[i];
-    ll l=0,mn=LLONG_MAX;
-    multiset<ll>mst;
-    for(ll r=0;r<n;r++)
-    {
-        mst.insert(v[r]);
-        if(r-l+1==k)
-        {
-            
-        }
-    }
+    cin>>n>>m;
+    v.resize(n);
+    for(ll i=0;i<n;i++) cin>>v[i];         
+    cin>>starti>>startj>>endi>>endj;
+    memset(vis,false,sizeof(vis));
+    dfs(starti,startj);
+    if(vis[endi][endj])  yes;
+    else no;
 
 }
 

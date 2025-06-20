@@ -22,21 +22,38 @@ typedef long double ld;
     cout.tie(NULL);
 const int mod = 1e9 + 7;
 
+vector<ll>parent;
+vector<ll>groupSize;
+ll mx,n,m;
+
+ll find(ll node)
+{
+    if(parent[node]==-1)    return node;
+    return parent[node]=find(parent[node]);
+}
+
+void union_by_size(ll node1,ll node2)
+{
+    ll leader1=find(node1),leader2=find(node2);
+    if(groupSize[leader1]>groupSize[leader2])   swap(leader1,leader2);
+    parent[leader1]=leader2;
+    groupSize[leader2]+=groupSize[leader1];
+    mx=max(mx,groupSize[leader2]);
+    n--;
+}
+
 void solve()
 {
 
-    ll n,k; cin>>n>>k;
-    vector<ll>v(n);
-    for(ll i=0;i<n;i++)	cin>>v[i];
-    ll l=0,mn=LLONG_MAX;
-    multiset<ll>mst;
-    for(ll r=0;r<n;r++)
+    cin>>n>>m;
+    parent.assign(n+1,-1);
+    groupSize.assign(n+1,1);
+    mx=LLONG_MIN;
+    for(ll i=0;i<m;i++)
     {
-        mst.insert(v[r]);
-        if(r-l+1==k)
-        {
-            
-        }
+        ll u,v; cin>>u>>v;
+        if(find(u)!=find(v))    union_by_size(u,v);
+        cout<<n<<" "<<mx<<nl;
     }
 
 }

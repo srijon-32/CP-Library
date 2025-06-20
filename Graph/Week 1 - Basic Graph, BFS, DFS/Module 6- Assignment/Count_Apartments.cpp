@@ -22,22 +22,49 @@ typedef long double ld;
     cout.tie(NULL);
 const int mod = 1e9 + 7;
 
+const int N=1e3+5;
+ll n,m; 
+char a[N][N];
+bool vis[N][N];
+vector<pair<ll,ll>>d={{1,0},{-1,0},{0,-1},{0,1}};
+
+bool valid(ll i,ll j)
+{
+    return (i>=0 && j>=0 && i<n && j<m);
+}
+
+void dfs(ll si,int sj)
+{
+    vis[si][sj]=true;
+    for(auto [b,c]:d)
+    {
+        ll ci=si+b,cj=sj+c;
+        if(valid(ci,cj) && !vis[ci][cj] && a[ci][cj]=='.')  dfs(ci,cj);
+    }
+}
+
 void solve()
 {
 
-    ll n,k; cin>>n>>k;
-    vector<ll>v(n);
-    for(ll i=0;i<n;i++)	cin>>v[i];
-    ll l=0,mn=LLONG_MAX;
-    multiset<ll>mst;
-    for(ll r=0;r<n;r++)
+    cin>>n>>m;
+    for(ll i=0;i<n;i++)
+        for(ll j=0;j<m;j++) cin>>a[i][j];
+    
+    memset(vis,false,sizeof(vis));
+    ll apt=0;
+    for(ll i=0;i<n;i++)
     {
-        mst.insert(v[r]);
-        if(r-l+1==k)
+        for(ll j=0;j<m;j++)
         {
-            
-        }
+            if(a[i][j]=='#')    vis[i][j]=true;
+            if(!vis[i][j])
+            {
+                dfs(i,j);
+                apt++;
+            }
+        }           
     }
+    cout<<apt<<nl;
 
 }
 

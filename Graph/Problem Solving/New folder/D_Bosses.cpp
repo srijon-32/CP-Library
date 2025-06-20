@@ -22,20 +22,47 @@ typedef long double ld;
     cout.tie(NULL);
 const int mod = 1e9 + 7;
 
+vector<ll>parent;
+vector<ll>level;
+
+ll update_level(ll node)
+{
+    if(parent[node]==-1)    return 0;
+    return level[node]=level[node]+update_level(parent[node]);
+}
+
+ll find(ll node)
+{
+    if(parent[node]==-1)    return node;
+    return parent[node]=find(parent[node]);
+}
+
+void unite(ll node1,ll node2)
+{
+    parent[node1]=node2;
+    level[node1]++;
+}
+
 void solve()
 {
 
-    ll n,k; cin>>n>>k;
-    vector<ll>v(n);
-    for(ll i=0;i<n;i++)	cin>>v[i];
-    ll l=0,mn=LLONG_MAX;
-    multiset<ll>mst;
-    for(ll r=0;r<n;r++)
+    ll n,m; cin>>n>>m;
+    parent.resize(n+1,-1);
+    level.resize(n+1,0);
+    for(ll i=0;i<m;i++)
     {
-        mst.insert(v[r]);
-        if(r-l+1==k)
+        ll op;  cin>>op;
+        if(op==1)
         {
-            
+            ll u,v; cin>>u>>v;
+            unite(u,v);
+        }
+        else
+        {
+            ll x;   cin>>x;
+            update_level(x);
+            find(x);
+            cout<<level[x]<<nl;
         }
     }
 

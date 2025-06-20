@@ -25,19 +25,39 @@ const int mod = 1e9 + 7;
 void solve()
 {
 
-    ll n,k; cin>>n>>k;
-    vector<ll>v(n);
-    for(ll i=0;i<n;i++)	cin>>v[i];
-    ll l=0,mn=LLONG_MAX;
-    multiset<ll>mst;
-    for(ll r=0;r<n;r++)
+    ll n,e; cin>>n>>e;
+    vector<vector<ll>>adj(n+1);
+    for(ll i=0;i<e;i++)
     {
-        mst.insert(v[r]);
-        if(r-l+1==k)
-        {
-            
-        }
+        ll u,v; cin>>u>>v;
+        adj[u].pb(v);
+        adj[v].pb(u);
     }
+    ll mx=LLONG_MIN;
+    bool flag=true;
+    ll cnt1=0,cnt2=0;
+    for(ll i=1;i<=n;i++)
+    {
+        if(adj[i].size()==1)    cnt1++;
+        if(adj[i].size()==2)    cnt2++;
+        mx=max(mx,ll(adj[i].size()));
+    }
+    if(cnt2==n)
+    {
+        cout<<"ring topology"<<nl;
+        return;
+    }
+    if(cnt1==2 && cnt2==n-2)
+    {
+        cout<<"bus topology"<<nl;
+        return;
+    }
+    if(cnt1==mx && cnt1+1==n)
+    {
+        cout<<"star topology"<<nl;
+        return;
+    }
+    cout<<"unknown topology"<<nl;
 
 }
 
